@@ -1,0 +1,21 @@
+
+
+This project is used to show sample code to use the GateIn/eXo Organization Service.
+
+The current version contains a simple Java class and REST service to create user and add user to a group.
+
+Once you have build and deploy the Jar to your library folder you can test it using the following URLs:
+
+To create a user :
+
+    [server]/rest/extensions/users/add?userName=[user]&email=[email]&firstName=[first]&lastName=[last]&password=[password]
+
+To Add a user to a group
+
+    [server]/rest/extensions/users/addMembership?userName=[user]&groupName=[partners]&membershipType=[member]
+
+To come:
+
+    Mapp all methods of the different handlers to manage the different administration operation using rest
+
+
