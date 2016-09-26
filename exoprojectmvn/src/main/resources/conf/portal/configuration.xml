@@ -1,0 +1,79 @@
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
+               xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+
+
+    <component>
+
+        <key>StartService</key>
+
+        <type>StartService</type>
+
+    </component>
+
+
+    <external-component-plugins>
+
+
+        <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
+
+        <component-plugin>
+
+            <name>MyJobScheduler</name>
+
+            <set-method>addPeriodJob</set-method>
+
+            <type>org.exoplatform.services.scheduler.PeriodJob</type>
+
+            <description>DumbJob</description>
+
+            <init-params>
+
+                <properties-param>
+
+                    <name>job.info</name>
+
+                    <description>DumbJob</description>
+
+                    <property name="jobName" value="DumbJob"/>
+
+                    <property name="groupName" value="DumbGroup"/>
+
+                    <property name="job" value="jobSchedulerexo.MyJobScheduler"/>
+
+                    <property name="repeatCount" value="0"/>
+
+                    <property name="period" value="60000"/>
+
+                    <property name="startTime" value="+45"/>
+
+                    <property name="endTime" value=""/>
+
+                </properties-param>
+
+            </init-params>
+
+        </component-plugin>
+    </external-component-plugins>
+
+
+    <external-component-plugins>
+
+
+        <target-component>org.exoplatform.services.organization.OrganizationService</target-component>
+        <component-plugin>
+
+            <name>ExoListener</name>
+
+            <set-method>addListenerPlugin</set-method>
+
+            <type>ExoListener</type>
+
+            <description>description</description>
+
+
+        </component-plugin>
+    </external-component-plugins>
+
+
+</configuration>
