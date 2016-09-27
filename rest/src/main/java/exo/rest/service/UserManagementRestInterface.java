@@ -27,38 +27,51 @@ public class UserManagementRestInterface implements ResourceContainer {
             @QueryParam("prefix") String userPrefix,
             @QueryParam("numberOfUsers") int nbUsers,
             @QueryParam("batch") int maxUsers
-    ){
+    ) {
         StringBuilder sb = new StringBuilder();
 
         try {
 
             UserManagementService userMgmtService = new UserManagementService();
-            for (int i=1 ;i<= nbUsers ;i++){
-                char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-                StringBuilder sb1 = new StringBuilder();
-                Random random = new Random();
-                for (int j = 0; j< 20; j++) {
-                    char c = chars[random.nextInt(chars.length)];
-                    sb1.append(c);
-                }
+            StringBuilder sb1 = new StringBuilder();
 
 
-                if (nbUsers<= maxUsers) {
-                    userMgmtService.createUser(userPrefix + sb1, sb1+"@exomail.hr", sb1+"firstName", sb1+"lastName", sb1+"password");
+            if (nbUsers <= maxUsers) {
+                for (int i = 1; i <= nbUsers; i++) {
+                    sb1 = RandomGenerate.generate();
+                    userMgmtService.createUser(userPrefix + sb1, sb1 + "@exomail.hr", sb1 + "firstName", sb1 + "lastName", sb1 + "password");
                     sb.append("User ").append("userName").append(" created.");
                     i += 1;
+
                 }
+            } else {
+
+
+                while (nbUsers > maxUsers) {
+                    for (int i = 1; i <= maxUsers; i++) {
+                        sb1 = RandomGenerate.generate();
+                        userMgmtService.createUser(userPrefix + sb1, sb1 + "@exomail.hr", sb1 + "firstName", sb1 + "lastName", sb1 + "password");
+                        sb.append("User ").append("userName").append(" created.");
+                        i += 1;
+
+                    }
+                    nbUsers -= maxUsers;
+                }
+
+
             }
+
 
         } catch (Exception ex) {
             Logger.getLogger(UserManagementRestInterface.class.getName()).log(Level.SEVERE, null, ex);
             sb.append(ex.getMessage());
         }
+
+
         return sb.toString();
 
 
     }
-
 
 
 }
